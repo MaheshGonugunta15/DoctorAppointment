@@ -1,0 +1,148 @@
+{% include 'head.html'%}
+<head>
+<style>
+body {
+  background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v870-tang-36_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=d79f64b7b61002995177b5a8d81b522e");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  height:200px;
+}
+</style>
+</head>
+
+<body>
+<div class="container mt-3">
+    <div class="text-center h6">View Bookings</div>
+    <div class="row">
+      {% for booking in bookings %}
+        {% set slot =getSlot_idByBookings(booking[4])%}
+        {% set user =getUser_idByBookings(booking[5])%}
+      {% set doctor = getDoctorBYBookings(booking[0])%}
+        {% set hospital = getHospitalBYBookings(booking[0])%}
+        <div class="col-md-6" >
+            <div class="card p-2 mt-2">
+                   <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-secondary" style="font-size:12px">Doctor Name</div>
+                            <div class="h6" style="font-size:12px">{{doctor[1]}} ({{doctor[3]}})</div>
+                        </div>
+                       <div class="col-md-4">
+                           <div class="text-secondary" style="font-size:12px">Doctor Speciality</div>
+                           <div class="h6" style="font-size:12px">{{doctor[6]}}</div>
+                       </div>
+                        <div class="col-md-4">
+                            <div class="text-secondary" style="font-size:12px">HospitalName</div>
+                            <div class="h6" style="font-size:12px">{{hospital[1]}}</div>
+                        </div>
+                       <hr>
+                        <div class="col-md-4">
+                            <div class="text-secondary" style="font-size:12px">Slot Number </div>
+                            <div class="h6" style="font-size:12px">{{slot[3]}}</div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="text-secondary" style="font-size:12px">Appointment Time</div>
+                            <div class="h6" style="font-size:12px">{{slot[4]}} ({{slot[1]}} - {{slot[2]}}) </div>
+                    </div>
+                        <div class="col-md-4">
+                            <div class="text-secondary" style="font-size:12px">Booking  Date</div>
+                           <div class="h6" style="font-size:12px">{{booking[2]}}</div>
+                       </div>
+                       <hr>
+                        <div class="col-md-4">
+                           <div class="text-secondary" style="font-size:12px">User Name</div>
+                           <div class="h6" style="font-size:12px">{{user[1]}} ({{user[3]}})</div>
+                       </div>
+                        <div class="col-md-4">
+                           <div class="text-secondary" style="font-size:12px">BloodGroup</div>
+                           <div class="h6" style="font-size:12px">{{user[4]}}</div>
+                       </div>
+                         <div class="col-md-4">
+                            <div class="text-secondary" style="font-size:12px">Booking  Status</div>
+                           <div class="h6" style="font-size:12px">{{booking[3]}}</div>
+                       </div>
+
+
+                </div>
+                <hr>
+                <div class="card-body">
+                    <div class="text-secondary" style="font-size:10px">Cause</div>
+                    <div class="h6" style="height:35px;overflow:auto;font-size:12px">{{booking[1]}}</div>
+                      <div class="text-secondary" style="font-size:12px">Prescription</div>
+                    {% if booking[6]!=None%}
+                    <div class="h6" style="height:35px;overflow:auto;font-size:12px">{{booking[6]}}</div>
+                    {% endif%}
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                             {% if session['role']== 'User'%}
+                            {% if booking[3]== 'Doctor Appointment Booked' :%}
+                            <form action="BookingStatus2" method="post">
+                                <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                <input type="submit" value="Cancel" class="btn btn-danger w-100">
+                            </form>
+                            {% endif%}
+                             {% endif%}
+                             {% if session['role']== 'Hospital'%}
+                             {% if booking[3]== 'Doctor Appointment Booked' :%}
+                            <form action="BookingStatus" method="post">
+                                <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                <input type="submit" value="Reject" class="btn btn-danger w-100">
+                            </form>
+                            {% endif%}
+                            {% elif session['role']=='Doctor'%}
+                             {% if booking[3]== 'Doctor Appointment Booked' %}
+                            <form action="BookingStatus1" method="post">
+                                <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                <input type="submit" value="Reject" class="btn btn-danger w-100">
+                            </form>
+                            {% endif%}
+                            {% endif%}
+                             {% if session['role']=='User'%}
+                            {% if booking[3]=='Prescription Written By Doctor'%}
+                             {% set isRated = isDoctorRated(booking[0],'Doctor') %}
+                             {% if isRated == 0%}
+                            <form action="RatingForDoctor" method="post">
+                                 <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                <input type="submit" value="Rating For Doctor" class="btn btn-success w-100">
+                            </form>
+                            {% endif%}
+                            {% endif%}
+                            {% endif%}
+                        </div>
+                         <div class="col-md-6">
+                             {% if session['role']=='Doctor'%}
+                              {% if booking[3]=='Doctor Appointment Booked'%}
+                               <form action="acceptRequest" method="post">
+                                   <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                 <input type="submit" value="Accept" class="btn btn-success w-100">
+                             </form>
+                             {% endif%}
+                             {% if booking[3]=='User Booking Accepted'%}
+                             <form action="writePrescription" method="post">
+                                 <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                 <input type="submit" value="Write Prescription" class="btn btn-primary w-100">
+                             </form>
+                             {% endif%}
+                             {% endif%}
+                              {% if session['role']=='User'%}
+                             {% if booking[3]=='Prescription Written By Doctor'%}
+                             {% set isRated1 = isHospitalRated(booking[0],'Hospital') %}
+                             {% if isRated1==0%}
+                            <form action="RatingForHospital" method="post">
+                                 <input type="hidden" name="booking_id" value="{{booking[0]}}">
+                                <input type="submit" value="Rating For Hospital" class="btn btn-success w-100">
+                            </form>
+                             {% endif%}
+                             {% endif%}
+                            {% endif%}
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+</body>

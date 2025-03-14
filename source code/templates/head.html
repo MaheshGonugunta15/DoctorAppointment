@@ -1,0 +1,869 @@
+{% include 'links.html'%}
+{% if session['role'] == 'admin'%}
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 85.10%;
+}
+<!--*:not(i) {-->
+<!--  font-family:  sans-serif;-->
+<!--}-->
+header {
+  position: ;
+  width: 100%;
+  background-color: #2c8eec;
+  padding: 2rem 2rem;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+nav a {
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+nav a#logo {
+  color: #000000;
+  font-weight: 700;
+}
+nav ul a {
+  color: #ffffff;
+  font-weight: 600;
+}
+nav ul a:hover {
+  border-bottom: 2px solid #ffffff;
+}
+section#home {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+h1 {
+  font-size: 4rem;
+}
+#ham-menu {
+  display: none;
+}
+nav ul.active {
+  left: 0;
+}
+@media only screen and (max-width: 991px) {
+  html {
+    font-size: 56.25%;
+  }
+  header {
+    padding: 2.2rem 5rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  html {
+    font-size: 50%;
+  }
+  #ham-menu {
+    display: block;
+    color: #ffffff;
+  }
+  nav a#logo,
+  #ham-menu {
+    font-size: 3.2rem;
+
+  }
+  nav ul {
+    background-color: black;
+    position: fixed;
+    left: -100vw;
+    top: 73.6px;
+    width: 100vw;
+    height: calc(100vh - 73.6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transition: 1s;
+    gap: 0;
+  }
+}
+@media only screen and (max-width: 575px) {
+  html {
+    font-size: 46.87%;
+  }
+  header {
+    padding: 2rem 3rem;
+  }
+  nav ul {
+    top: 65.18px;
+    height: calc(100vh - 65.18px);
+  }
+}
+</style>
+<script>
+  let hamMenuIcon = document.getElementById("ham-menu");
+let navBar = document.getElementById("nav-bar");
+let navLinks = navBar.querySelectorAll("li");
+
+hamMenuIcon.addEventListener("click", () => {
+  navBar.classList.toggle("active");
+  hamMenuIcon.classList.toggle("fa-times");
+});
+navLinks.forEach((navLinks) => {
+  navLinks.addEventListener("click", () => {
+    navBar.classList.remove("active");
+    hamMenuIcon.classList.toggle("fa-times");
+  });
+});
+</script>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img class="f" src="https://thumbs.dreamstime.com/b/hospital-logo-template-hospital-logo-template-117487677.jpg" style="height:50px;border-radius: 25px;">
+        <i class="fas fa-bars" id="ham-menu"></i>
+        <ul id="nav-bar">
+          <li>
+            <a href="/admin">Home</a>
+          </li>
+           <li>
+            <a href="/addHospital">Add Hospital</a>
+          </li>
+          <li>
+            <a href="/viewHospitals">View Hospitals</a>
+          </li>
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+
+        </ul>
+      </nav>
+    </header>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+</body>
+{% elif session['role'] == 'Doctor'%}
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 85.10%;
+}
+*:not(i) {
+  font-family:  sans-serif;
+}
+header {
+  position: ;
+  width: 100%;
+  background-color: #2c8eec;
+  padding: 2rem 2rem;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+nav a {
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+nav a#logo {
+  color: #000000;
+  font-weight: 700;
+}
+nav ul a {
+  color: #ffffff;
+  font-weight: 600;
+}
+nav ul a:hover {
+  border-bottom: 2px solid #ffffff;
+}
+section#home {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+h1 {
+  font-size: 4rem;
+}
+#ham-menu {
+  display: none;
+}
+nav ul.active {
+  left: 0;
+}
+@media only screen and (max-width: 991px) {
+  html {
+    font-size: 56.25%;
+  }
+  header {
+    padding: 2.2rem 5rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  html {
+    font-size: 50%;
+  }
+  #ham-menu {
+    display: block;
+    color: #ffffff;
+  }
+  nav a#logo,
+  #ham-menu {
+    font-size: 3.2rem;
+
+  }
+  nav ul {
+    background-color: black;
+    position: fixed;
+    left: -100vw;
+    top: 73.6px;
+    width: 100vw;
+    height: calc(100vh - 73.6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transition: 1s;
+    gap: 0;
+  }
+}
+@media only screen and (max-width: 575px) {
+  html {
+    font-size: 46.87%;
+  }
+  header {
+    padding: 2rem 3rem;
+  }
+  nav ul {
+    top: 65.18px;
+    height: calc(100vh - 65.18px);
+  }
+}
+</style>
+<script>
+  let hamMenuIcon = document.getElementById("ham-menu");
+let navBar = document.getElementById("nav-bar");
+let navLinks = navBar.querySelectorAll("li");
+
+hamMenuIcon.addEventListener("click", () => {
+  navBar.classList.toggle("active");
+  hamMenuIcon.classList.toggle("fa-times");
+});
+navLinks.forEach((navLinks) => {
+  navLinks.addEventListener("click", () => {
+    navBar.classList.remove("active");
+    hamMenuIcon.classList.toggle("fa-times");
+  });
+});
+</script>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img class="f" src="https://thumbs.dreamstime.com/b/hospital-logo-template-hospital-logo-template-117487677.jpg" style="height:50px;border-radius: 25px;">
+        <i class="fas fa-bars" id="ham-menu"></i>
+        <ul id="nav-bar">
+
+          <li>
+            <a href="/doctor">Home</a>
+          </li>
+           <li>
+            <a href="/sendHospitalRequest">View  Hospitals</a>
+          </li>
+           <li>
+            <a href="/viewDoctorRequests">View <My></My> Requests</a>
+          </li>
+        <li>
+            <a href="/viewBookings">User Bookings</a>
+          </li>
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+
+        </ul>
+      </nav>
+    </header>
+    <script src="script.js"></script>
+  </body>
+</html>
+</body>
+{% elif session['role'] == 'Hospital'%}
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 85.10%;
+}
+*:not(i) {
+  font-family:  sans-serif;
+}
+header {
+  position: ;
+  width: 100%;
+  background-color: #2c8eec;
+  padding: 2rem 2rem;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+nav a {
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+nav a#logo {
+  color: #000000;
+  font-weight: 700;
+}
+nav ul a {
+  color: #ffffff;
+  font-weight: 600;
+}
+nav ul a:hover {
+  border-bottom: 2px solid #ffffff;
+}
+section#home {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+h1 {
+  font-size: 4rem;
+}
+#ham-menu {
+  display: none;
+}
+nav ul.active {
+  left: 0;
+}
+@media only screen and (max-width: 991px) {
+  html {
+    font-size: 56.25%;
+  }
+  header {
+    padding: 2.2rem 5rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  html {
+    font-size: 50%;
+  }
+  #ham-menu {
+    display: block;
+    color: #ffffff;
+  }
+  nav a#logo,
+  #ham-menu {
+    font-size: 3.2rem;
+
+  }
+  nav ul {
+    background-color: black;
+    position: fixed;
+    left: -100vw;
+    top: 73.6px;
+    width: 100vw;
+    height: calc(100vh - 73.6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transition: 1s;
+    gap: 0;
+  }
+}
+@media only screen and (max-width: 575px) {
+  html {
+    font-size: 46.87%;
+  }
+  header {
+    padding: 2rem 3rem;
+  }
+  nav ul {
+    top: 65.18px;
+    height: calc(100vh - 65.18px);
+  }
+}
+</style>
+<script>
+  let hamMenuIcon = document.getElementById("ham-menu");
+let navBar = document.getElementById("nav-bar");
+let navLinks = navBar.querySelectorAll("li");
+
+hamMenuIcon.addEventListener("click", () => {
+  navBar.classList.toggle("active");
+  hamMenuIcon.classList.toggle("fa-times");
+});
+navLinks.forEach((navLinks) => {
+  navLinks.addEventListener("click", () => {
+    navBar.classList.remove("active");
+    hamMenuIcon.classList.toggle("fa-times");
+  });
+});
+</script>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img class="f" src="https://thumbs.dreamstime.com/b/hospital-logo-template-hospital-logo-template-117487677.jpg" style="height:50px;border-radius: 25px;">
+        <i class="fas fa-bars" id="ham-menu"></i>
+        <ul id="nav-bar">
+
+          <li>
+            <a href="/hospital">Home</a>
+          </li>
+           <li>
+            <a href="/viewDoctorRequests">View Doctor Requests</a>
+          </li>
+           <li>
+            <a href="/viewHospitalDoctors">View My Doctors</a>
+          </li>
+           <li>
+            <a href="/viewBookings">User Bookings</a>
+          </li>
+
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+
+        </ul>
+      </nav>
+    </header>
+<!--    <section id="home">-->
+<!--      <h1>DoctorAppointmentBooking</h1>-->
+<!--    </section>-->
+    <script src="script.js"></script>
+  </body>
+</html>
+</body>
+{% elif session['role']  == 'User'%}
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 82.10%;
+}
+*:not(i) {
+  font-family:  sans-serif;
+}
+header {
+  position: ;
+  width: 100%;
+  background-color: #2c8eec;
+  padding: 2rem 2rem;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+nav a {
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+nav a#logo {
+  color: #000000;
+  font-weight: 700;
+}
+nav ul a {
+  color: #ffffff;
+  font-weight: 600;
+}
+nav ul a:hover {
+  border-bottom: 2px solid #ffffff;
+}
+section#home {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+h1 {
+  font-size: 4rem;
+}
+#ham-menu {
+  display: none;
+}
+nav ul.active {
+  left: 0;
+}
+@media only screen and (max-width: 991px) {
+  html {
+    font-size: 56.25%;
+  }
+  header {
+    padding: 2.2rem 5rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  html {
+    font-size: 50%;
+  }
+  #ham-menu {
+    display: block;
+    color: #ffffff;
+  }
+  nav a#logo,
+  #ham-menu {
+    font-size: 3.2rem;
+
+  }
+  nav ul {
+    background-color: black;
+    position: fixed;
+    left: -100vw;
+    top: 73.6px;
+    width: 100vw;
+    height: calc(100vh - 73.6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transition: 1s;
+    gap: 0;
+  }
+}
+@media only screen and (max-width: 575px) {
+  html {
+    font-size: 46.87%;
+  }
+  header {
+    padding: 2rem 3rem;
+  }
+  nav ul {
+    top: 65.18px;
+    height: calc(100vh - 65.18px);
+  }
+}
+</style>
+<script>
+  let hamMenuIcon = document.getElementById("ham-menu");
+let navBar = document.getElementById("nav-bar");
+let navLinks = navBar.querySelectorAll("li");
+
+hamMenuIcon.addEventListener("click", () => {
+  navBar.classList.toggle("active");
+  hamMenuIcon.classList.toggle("fa-times");
+});
+navLinks.forEach((navLinks) => {
+  navLinks.addEventListener("click", () => {
+    navBar.classList.remove("active");
+    hamMenuIcon.classList.toggle("fa-times");
+  });
+});
+</script>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img class="f" src="https://thumbs.dreamstime.com/b/hospital-logo-template-hospital-logo-template-117487677.jpg" style="height:50px;border-radius: 25px;">
+        <i class="fas fa-bars" id="ham-menu"></i>
+        <ul id="nav-bar">
+
+          <li>
+            <a href="/user">Home</a>
+          </li>
+            <li>
+            <a href="/viewDoctors">View Doctors</a>
+          </li>
+          <li>
+            <a href="/viewBookings">View Bookings</a>
+          </li>
+<!--          <li>-->
+<!--            <a href="/dLogin">Doctor</a>-->
+<!--          </li>-->
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+
+        </ul>
+      </nav>
+    </header>
+<!--    <section id="home">-->
+<!--      <h1>DoctorAppointmentBooking</h1>-->
+<!--    </section>-->
+    <script src="script.js"></script>
+  </body>
+</html>
+</body>
+{% else %}
+
+<style>
+    * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 82.10%;
+}
+*:not(i) {
+  font-family:  sans-serif;
+}
+header {
+  position: ;
+  width: 100%;
+  background-color: #2c8eec;
+  padding: 2rem 2rem;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+nav a {
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+nav a#logo {
+  color: #000000;
+  font-weight: 700;
+}
+nav ul a {
+  color: #ffffff;
+  font-weight: 600;
+}
+nav ul a:hover {
+  border-bottom: 2px solid #ffffff;
+}
+section#home {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+h1 {
+  font-size: 4rem;
+}
+#ham-menu {
+  display: none;
+}
+nav ul.active {
+  left: 0;
+}
+@media only screen and (max-width: 991px) {
+  html {
+    font-size: 56.25%;
+  }
+  header {
+    padding: 2.2rem 5rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  html {
+    font-size: 50%;
+  }
+  #ham-menu {
+    display: block;
+    color: #ffffff;
+  }
+  nav a#logo,
+  #ham-menu {
+    font-size: 3.2rem;
+
+  }
+  nav ul {
+    background-color: black;
+    position: fixed;
+    left: -100vw;
+    top: 73.6px;
+    width: 100vw;
+    height: calc(100vh - 73.6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transition: 1s;
+    gap: 0;
+  }
+}
+@media only screen and (max-width: 575px) {
+  html {
+    font-size: 46.87%;
+  }
+  header {
+    padding: 2rem 3rem;
+  }
+  nav ul {
+    top: 65.18px;
+    height: calc(100vh - 65.18px);
+  }
+}
+</style>
+<script>
+  let hamMenuIcon = document.getElementById("ham-menu");
+let navBar = document.getElementById("nav-bar");
+let navLinks = navBar.querySelectorAll("li");
+
+hamMenuIcon.addEventListener("click", () => {
+  navBar.classList.toggle("active");
+  hamMenuIcon.classList.toggle("fa-times");
+});
+navLinks.forEach((navLinks) => {
+  navLinks.addEventListener("click", () => {
+    navBar.classList.remove("active");
+    hamMenuIcon.classList.toggle("fa-times");
+  });
+});
+</script>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img class="f" src="https://thumbs.dreamstime.com/b/hospital-logo-template-hospital-logo-template-117487677.jpg" style="height:50px;border-radius: 25px;">
+        <i class="fas fa-bars" id="ham-menu"></i>
+        <ul id="nav-bar">
+
+          <li>
+            <a href="/">Home</a>
+          </li>
+           <li>
+            <a href="/aLogin">Admin</a>
+          </li>
+          <li>
+            <a href="/hLogin">Hospital</a>
+          </li>
+          <li>
+            <a href="/dLogin">Doctor</a>
+          </li>
+          <li>
+            <a href="/uLogin">User</a>
+          </li>
+
+        </ul>
+      </nav>
+    </header>
+<!--    <section id="home">-->
+<!--      <h1>DoctorAppointmentBooking</h1>-->
+<!--    </section>-->
+    <script src="script.js"></script>
+  </body>
+</html>
+</body>
+{% endif%}

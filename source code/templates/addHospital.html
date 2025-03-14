@@ -1,0 +1,107 @@
+{% include 'head.html'%}
+<style>
+    #hospital_name {
+     padding: 10px;
+    }
+     #email {
+     padding: 10px;
+    }
+     #phone {
+     padding: 10px;
+    }
+     #picture {
+     padding: 10px;
+    }
+     #password {
+     padding: 10px;
+    }
+      #speciality {
+     padding: 10px;
+    }
+      #address {
+     padding: 10px;
+    }
+</style>
+<script>
+ function validate(){
+        let hospital_name = document.getElementById("hospital_name").value
+        if(hospital_name==""){
+            alert("Enter Hospital Name")
+            return false;
+        }
+        let email = document.getElementById("email").value
+        if(email==""){
+            alert("Enter Email")
+            return false;
+        }
+         let password = document.getElementById("password").value
+        if(password==""){
+            alert("Enter Password")
+            return false;
+        }
+         let picture = document.getElementById("picture").value
+        if(picture==""){
+            alert("Choose Picture")
+            return false;
+        }
+         let phone = document.getElementById("phone").value
+        if(phone==""){
+            alert("Enter PhoneNumber")
+            return false;
+        }
+        let speciality = document.getElementById("speciality").value
+        if(speciality==""){
+            alert("Enter Speciality")
+            return false;
+        }
+        let address = document.getElementById("address").value
+        if(address==""){
+            alert("Enter Address")
+            return false;
+        }
+        return true
+    }
+</script>
+<div class="container mt-5">
+    <div class="card p-3 mt-3">
+        <form action="addHospital1" method="post" enctype="multipart/form-data" onsubmit="return validate()">
+            <div class="h3 text-center">Add Hospital</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mt-1">
+                        <label for="hospital_name" style="font-size:16px">Hospital Name</label>
+                        <input type="text" class="form-control mt-1" id="hospital_name" placeholder="Enter HospitalName" name="hospital_name">
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="email" style="font-size:16px">Email</label>
+                        <input type="email" class="form-control mt-1" id="email" placeholder="Enter Email" name="email">
+                    </div>
+                     <div class="form-group mt-2">
+                        <label for="password" style="font-size:16px">Password</label>
+                        <input type="password" class="form-control mt-1" id="password" placeholder="Enter Password" name="password">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="picture" style="font-size:16px">Choose Profile</label>
+                        <input type="file" class="form-control" id="picture" name="picture">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                      <div class="form-group mt-1">
+                        <label for="phone" style="font-size:16px">Phone</label>
+                        <input type="number" class="form-control" id="phone" placeholder="Enter PhoneNumber" name="phone">
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="speciality" style="font-size:16px">Speciality</label>
+                        <input type="text" name="speciality" id="speciality" class="form-control mt-1" placeholder="Enter Speciality">
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="address" style="font-size:16px">Address</label>
+                        <textarea  class="form-control mt-1" id="address" placeholder="Address" name="address"></textarea>
+                    </div>
+                     <input type="submit" value="Add Hospital" class="btn btn-success w-100 mt-4">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

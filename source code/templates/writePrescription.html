@@ -1,0 +1,17 @@
+{% include 'head.html'%}
+<div class="row mt-2">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 ms-2">
+        <div class="card p-4 mt-5">
+            <form action="writePrescription1" method="post">
+                <div class="h4 text-center">Prescription</div>
+                <div class="form-group">
+                    <input type="hidden" name="booking_id" value="{{booking_id}}">
+                    <label for="prescription" ></label>
+                    <textarea  class="form-control mt-1" id="prescription" cols="4" placeholder="Prescription" name="prescription" required></textarea>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-success w-100 mb-2 mt-3">
+            </form>
+        </div>
+    </div>
+</div>

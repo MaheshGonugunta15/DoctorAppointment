@@ -1,0 +1,83 @@
+{% include 'head.html' %}
+<style>
+    #doctor_name {
+     padding: 10px;
+    }
+     #email {
+     padding: 10px;
+    }
+     #phone {
+     padding: 10px;
+    }
+     #picture {
+     padding: 10px;
+    }
+     #password {
+     padding: 10px;
+    }
+      #speciality {
+     padding: 10px;
+    }
+      #about {
+     padding: 10px;
+    }
+      #qualification {
+     padding: 10px;
+    }
+      #designation {
+     padding: 10px;
+    }
+
+
+</style>
+<div class="container">
+    <div class="card p-3 mt-3">
+        <form action="doctorReg1" method="post" enctype="multipart/form-data">
+            <div class="h4 text-center">Doctor Registration</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mt-1">
+                        <label for="doctor_name"  style="font-size:16px">Doctor Name</label>
+                        <input type="text" class="form-control" id="doctor_name" placeholder="Enter Name" name="doctor_name" required>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="email"  style="font-size:16px">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="phone"  style="font-size:16px">Phone</label>
+                        <input type="number" class="form-control" id="phone" placeholder="Enter phone" name="phone" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="password"  style="font-size:16px">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="picture"  style="font-size:16px">Choose Profile</label>
+                        <input type="file" class="form-control" id="picture" name="picture" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="qualification"  style="font-size:16px">Qualification</label>
+                        <input type="text" name="qualification" class="form-control mt-1" id="qualification" placeholder="Qualification" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="designation"  style="font-size:16px">Designation</label>
+                        <input type="text" name="designation" id="designation" class="form-control mt-1" placeholder="designation" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="speciality"  style="font-size:16px">Speciality</label>
+                        <input type="text" name="speciality" id="speciality" class="form-control mt-1" placeholder="Enter Speciality" required>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="about"  style="font-size:16px">About</label>
+                        <textarea  class="form-control mt-2" id="about" placeholder="About" name="about" required></textarea>
+                    </div>
+                </div>
+               <input type="submit" value="Register" class="btn btn-success w-100 mt-5">
+
+            </div>
+        </form>
+    </div>
+</div>

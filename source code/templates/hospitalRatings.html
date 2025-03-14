@@ -1,0 +1,37 @@
+{% include 'head.html'%}
+<head>
+<style>
+body {
+  background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v870-tang-36_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=d79f64b7b61002995177b5a8d81b522e");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  height:200px;
+}
+</style>
+</head>
+<div class="container mt-3">
+    <div class="text-center h6">Ratings And Reviews</div>
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="card p-3 m-1">
+                        <div class="text-center h5"><b>{{avg_rating}}</b></div>
+                        {% for review in reviews%}
+                        {% set name = getUserbyReview(review[4])%}
+                            <div class="text-muted mt-2" style="font-size:80%">Review By  <b>({{name[1]}})</b>  on {{review[5]}}</div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="text-muted mt-2" style="font-size:80%">Rating : </div>
+                                    <div class="h6">{{review[1]}}</div>
+                                </div>
+                                <div class="col-md-11">
+                                    <div class="text-muted mt-2" style="font-size:80%">Review : </div>
+                                    <div class="h6">{{review[2]}}</div>
+                                </div>
+                            </div>
+
+                        <hr>
+                        {% endfor%}
+                    </div>
+                </div>
+        </div>
+    </div>

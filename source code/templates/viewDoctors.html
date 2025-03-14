@@ -1,0 +1,91 @@
+{% include 'head.html'%}
+<head>
+<style>
+body {
+  background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v870-tang-36_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=d79f64b7b61002995177b5a8d81b522e");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  height:200px;
+}
+</style>
+</head>
+<div class="container mt-3">
+    <form action="viewDoctors">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <input type="text" style="font-size:17px" placeholder="Search for hospital/doctor" id="search_name"  class="form-control" name="search_name"  {% if search_name!=None: %} value="{{search_name}}" {% endif %}>
+            </div>
+            <div class="col-md-3">
+                <input type="submit"  value="Search" class="btn btn-primary w-50">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container mt-3">
+    <div class="text-center h6">Doctors List</div>
+    <div class="row">
+      {% for doctorRequest in doctorRequests %}
+        {% set hospital = getHospitalBYDoctorRequest(doctorRequest[5])%}
+        {% set doctor = getDoctorByDoctorRequest(doctorRequest[6])%}
+        {% set doctor_request_timings = getDoctorTimings(doctor[0])%}
+        <div class="col-md-12">
+            <div class="card mt-1">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="h6 mt-2"><img src="/static/DoctorPictures/{{doctor[4]}}" style="max-width:100%;height:60px"></div>
+                            </div>
+                              <div class="col-md-4">
+                                <div class="text-secondary"  style="font-size:11px">Speciality</div>
+                            <div class="h6" style="font-size:11px">{{doctor[6]}}</div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="" style="overflow:auto;height:50px;text-align: justify; text-indent: 10px;">{{doctor[9]}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-secondary"  style="font-size:11px">Name</div>
+                            <a href="doctorRatings?doctor_id={{doctor[0]}}">{{doctor[1]}}</a>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-secondary" style="font-size:11px">Doctor Number</div>
+                            <div class="h6" style="font-size:11px">{{doctor[3]}}</div>
+                        </div>
+                           <div class="col-md-3">
+                            <div class="text-secondary" style="font-size:11px">Designation</div>
+                            <div class="h6" style="font-size:11px">{{doctor[8]}}</div>
+                        </div>
+                         <div class="col-md-3">
+                           <a href="viewAvailableTimings?doctor_id={{doctor[0]}}" class="btn btn-primary w-100">Book Slot</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-secondary" style="font-size:11px">Timings</div>
+                        <div class="container">
+                            <table class="table table-bordered" style="font-size:13px">
+                                <tr>
+                                    <th>FromTime</th>
+                                    <th>ToTime</th>
+                                    <th>Day</th>
+                                    <th>Working Hospital</th>
+                                    <th>View Hospital</th>
+                                </tr>
+                                {% for doctor_request_timing in doctor_request_timings%}
+                                {% set hospital = get_hospital(doctor_request_timing[5])%}
+                                <tr>
+                                    <td>{{doctor_request_timing[2]}}</td>
+                                    <td>{{doctor_request_timing[3]}}</td>
+                                     <td>{{doctor_request_timing[1]}}</td>
+                                    <td><b>{{hospital[1]}}</b></td>
+                                   <td><a href="view_my_hospitals?hospital_id={{doctor_request_timing[5]}}" class="btn btn-primary">View Hospital</a> </td>
+                                </tr>
+                                {% endfor%}
+                            </table>
+                        </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,126 @@
+{% include 'head.html'%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(function(){
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    var minDate= year + '-' + month + '-' + day;
+    $('#booking_date2').attr('min', minDate);
+}
+);
+</script>
+<head>
+<style>
+body {
+  background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v870-tang-36_1.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=d79f64b7b61002995177b5a8d81b522e");
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  height:200px;
+}
+</style>
+<style>
+    [type="radio"] {
+        display:None;
+    }
+    [type="radio"] +label {
+        display:inline-block;
+        background-color:#ccc;
+        width:100%;
+        height:70px;
+        text-align: center;
+    }
+    [type="radio"]:checked + label {
+        background-color: green;
+        color:white;
+        font-weight:bolder;
+    }
+
+</style>
+
+</head>
+<div class="container">
+    <div class="text-center">View Available Timings</div>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-3">
+                        <form action="viewAvailableTimings">
+                            <input type="hidden" name="doctor_id" value="{{doctor_id}}">
+                            <input type="date"  name="booking_date" value="{{booking_date2}}" onchange="this.form.submit()" id="booking_date2" class=" form-control" required>
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center mt-2"><h4>{{day}}</h4></div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+            <div class="card-body">
+                {% for doctorRequest in doctorRequests: %}
+                {% set count = get_validation(booking_date)%}
+                {% set hospital = getHospital_by_doctor_request_id(doctorRequest[5])%}
+                <form action="bookAppointment" method="post" onsubmit="return validate()">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-2"><img src="/static/hospitalPictures/{{hospital[4]}}" style="max-width:100%;height:60px"><br><b>{{hospital[1]}}</b></div>
+                                <div class="col-md-2 mt-1">
+                                    <label>Consultant From Time :</label>
+                                     <br> <b>{{doctorRequest[2]}}</b>
+                                </div>
+                                <div class="col-md-2 mt-1">
+                                      <label>Consultant To Time :</label>
+                                       <br><b>{{doctorRequest[3]}}</b>
+                                </div>
+                                <div class="col-md-2 mt-1">
+                                    <label>Consultant Fee :</label>
+                                    <br><b>$ {{doctorRequest[7]}}</b> </div>
+                                {% if count ==0:%}
+                                <div class="col-md-4">
+                                    <input type="hidden" name="booking_date" value="{{booking_date}}" id="booking_date">
+                                    <input type="submit" value="Book Appointment" class="btn btn-primary w-100 ">
+                                </div>
+                                {% else%}
+                                 <div class="col-md-4">
+                                    <h5>You Can Not Book Today</h5>
+                                </div>
+                                {%endif%}
+                            </div>
+                        </div>
+                        <div class="cord-body ps-3 pe-3 pb-3">
+                            <div class="row">
+                                {% for slot in doctorRequest[8]: %}
+                                {% set isBooked = isSlotBooked(slot[0],booking_date) %}
+                                <div class="col-md-2 mt-3">
+                                    {% if isBooked: %}
+                                    <input  type="radio">
+                                        <label class="card p-2  bg-danger   " for="{{slot[0]}}{{slot[3]}}1">
+                                        Slot :  <b>{{slot[3]}}</b><br>From Time : {{slot[1]}} <br>To Time : {{slot[2]}}
+                                        </label>
+                                    {% else: %}
+                                        <input  type="radio"   id="{{slot[0]}}{{slot[3]}}2" name="slot_id" value="{{slot[0]}}" required>
+                                        <label class="card p-2 text-center mycolor" for="{{slot[0]}}{{slot[3]}}2">
+                                              Slot : <b> {{slot[3]}}</b><br>From Time : {{slot[1]}} <br>To Time : {{slot[2]}}
+                                        </label>
+                                    {% endif %}
+
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                     </form>
+                {% endfor %}
+            </div>
+
+         </div>
+
+</div>

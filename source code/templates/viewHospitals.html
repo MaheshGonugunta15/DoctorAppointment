@@ -1,0 +1,25 @@
+{% include 'head.html'%}
+
+<div class="container mt-3">
+<h3 class="text-center">View Hospitals</h3>
+<table style="width:100%" class="table table-bordered">
+  <tr>
+    <th>Hospital</th>
+    <th>Email</th>
+    <th>Phone Number</th>
+    <th>Specialty</th>
+    <th>Address</th>
+  </tr>
+  {% for hospital in hospitals%}
+  <tr>
+    <td><img src="/static/hospitalPictures/{{hospital[4]}}" style="max-width:100%;height:50px;"><br> {{hospital[1]}}</td>
+    <td>{{hospital[2]}}</td>
+    <td>{{hospital[3]}}</td>
+    <td>{{hospital[6]}}</td>
+     <td>{{hospital[7]}}</td>
+  </tr>
+  {% endfor%}
+
+</table>
+</div>
+

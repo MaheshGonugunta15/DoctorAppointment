@@ -1,0 +1,65 @@
+{% include 'head.html'%}
+<style>
+    [type="checkbox"] {
+        display:None;
+    }
+    [type="checkbox"] +label {
+        display:inline-block;
+        background-color:#ccc;
+        width:100%;
+        height:50px;
+        text-align: center;
+        line-height:50px;
+        vertical-align:middle;
+    }
+    [type="checkbox"]:checked + label {
+        background-color: green;
+        color:white;
+        font-weight:bolder;
+    }
+</style>
+<div class="row mt-2">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 ms-2">
+        <div class="card p-4 mt-3">
+            <form action="sendRequest1" method="post">
+                <input type="hidden" name="hospital_id" value="{{hospital_id}}">
+                <div class="h4 text-center" style="font-size:12px">Choose Available Timings</div>
+
+                <div class="row">
+                    <div class="col-md-4 mt-3">
+                        <input type="checkbox" name="Monday" id="Monday" value="Monday"> <label for="Monday">Monday</label>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <input type="checkbox" name="Tuesday" id="Tuesday" value="Tuesday"> <label for="Tuesday">Tuesday</label>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <input type="checkbox" name="Wednesday" id="Wednesday" value="Wednesday"> <label for="Wednesday">Wednesday</label>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <input type="checkbox" name="Thursday" id="Thursday" value="Thursday"> <label for="Thursday">Thursday</label>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <input type="checkbox" name="Friday" id="Friday" value="Friday"> <label for="Friday">Friday</label>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <input type="checkbox" name="Saturday" id="Saturday" value="Saturday"> <label for="Saturday">Saturday</label>
+                    </div>
+                    <div class="col-md-4 mt-3">
+                        <input type="checkbox" name="Sunday" id="Sunday" value="Sunday"> <label for="Sunday">Sunday</label>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="fromTime" >FromTime</label>
+                    <input type="time" class="form-control mt-1" id="fromTime"  name="fromTime" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="toTime">To Time</label>
+                    <input type="time" class="form-control mt-1" id="toTime"  name="toTime" required>
+                </div>
+                <input type="submit" value="Send Request" class="btn btn-primary w-100 mb-2 mt-3">
+            </form>
+        </div>
+    </div>
+</div>
