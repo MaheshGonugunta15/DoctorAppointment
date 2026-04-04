@@ -1,21 +1,18 @@
-Project Name: Doctor Appointment System
+Project Title:
+Doctor Appointment System
 
 Description:
-A web-based application that allows patients to book appointments with doctors online. The system helps manage doctor schedules, patient information, and appointment bookings efficiently. It provides an easy interface for patients to view doctor availability and schedule appointments.
+Developed a web-based Doctor Appointment System that allows patients to book and manage appointments with doctors online. The system streamlines doctor scheduling, patient management, and appointment handling. Additionally, integrated an LLM-based chatbot to assist patients with appointment queries, basic health guidance, and navigation support.
 
-Tech Stack:
-Python  
-Flask  
-MySQL  
-HTML  
-CSS  
-JavaScript  
+Key Features:
 
-Features:
-User registration and login  
-Patient dashboard for booking appointments  
-View available doctors and schedules  
-Book and manage appointments  
-Admin panel for managing doctors and appointments  
-Secure database management using MySQL  
-Responsive user interface
+Implemented user authentication (registration/login) for patients and admin
+Developed patient dashboard to book, view, and manage appointments
+Enabled users to view doctor availability and schedules in real-time
+Built admin panel to manage doctors, appointments, and system data
+Integrated LLM-based chatbot to handle patient queries and provide assistance
+Designed responsive UI for seamless user experience across devices
+Managed structured data using MySQL for secure and efficient storage
+
+Technologies Used:
+Python, Flask, MySQL, HTML, CSS, JavaScript, REST APIs, LLM Integratio
